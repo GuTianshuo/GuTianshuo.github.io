@@ -50,7 +50,7 @@
     '.translated-article p{margin:8px 0}' +
     '.translated-article blockquote{border-left:3px solid #ddd;padding-left:12px;color:#666}' +
     '.translated-article pre{background:#f5f5f5;padding:10px;overflow-x:auto;border-radius:3px}' +
-    '.article-toolbar{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin:10px 0 14px}' +
+    '.article-toolbar{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin:10px 0 14px;padding:0 20px}' +
     '.article-poll{display:flex;align-items:center;flex-wrap:wrap;gap:6px}' +
     '.poll-toggle{background:none;border:none;border-bottom:1px dashed #bbb;color:#555;font-size:14px;font-family:inherit;cursor:pointer;padding:2px 0;margin-bottom:2px}' +
     '.poll-toggle:hover{color:#258fb8;border-bottom-color:#258fb8}' +
