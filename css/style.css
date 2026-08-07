@@ -117,7 +117,7 @@ body,
 }
 body {
   background: #eee;
-  font: 14px -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  font: 16px -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-text-size-adjust: 100%;
 }
 .outer {
@@ -275,7 +275,7 @@ body {
 .article-entry dl,
 .widget dl {
   margin: 0 20px;
-  line-height: 1.6em;
+  line-height: 1.5;
 }
 .article-entry ul ul,
 .widget ul ul,
@@ -397,9 +397,9 @@ body {
 }
 .nav-icon {
   text-align: center;
-  font-size: 14px;
-  width: 14px;
-  height: 14px;
+  font-size: 16px;
+  width: 16px;
+  height: 16px;
   padding: 20px 15px;
   position: relative;
   cursor: pointer;
@@ -546,8 +546,8 @@ a.article-title:hover {
 }
 .article-entry p,
 .article-entry table {
-  line-height: 1.6em;
-  margin: 1.6em 0;
+  line-height: 1.5;
+  margin: 1.5 0;
 }
 .article-entry h1,
 .article-entry h2,
@@ -556,6 +556,15 @@ a.article-title:hover {
 .article-entry h5,
 .article-entry h6 {
   font-weight: bold;
+}
+.article-entry h2 {
+  font-size: 2em;
+}
+.article-entry h3 {
+  font-size: 1.625em;
+}
+.article-entry h4 {
+  font-size: 1.25em;
 }
 .article-entry h1,
 .article-entry h2,
@@ -576,8 +585,8 @@ a.article-title:hover {
 .article-entry ul,
 .article-entry ol,
 .article-entry dl {
-  margin-top: 1.6em;
-  margin-bottom: 1.6em;
+  margin-top: 1.5;
+  margin-bottom: 1.5;
 }
 .article-entry img,
 .article-entry video {
@@ -605,12 +614,12 @@ a.article-title:hover {
 }
 .article-entry blockquote {
   font-family: Georgia, "Times New Roman", serif;
-  margin: 1.6em 20px;
+  margin: 1.5 20px;
   text-align: center;
 }
 .article-entry blockquote footer {
-  font-size: 14px;
-  margin: 1.6em 0;
+  font-size: 16px;
+  margin: 1.5 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
 }
 .article-entry blockquote footer cite:before {
@@ -672,9 +681,9 @@ a.article-title:hover {
 }
 .article-footer {
   font-size: 0.85em;
-  line-height: 1.6em;
+  line-height: 1.5;
   border-top: 1px solid #ddd;
-  padding-top: 1.6em;
+  padding-top: 1.5;
   margin: 0 20px 20px;
 }
 .article-footer:before,
@@ -789,7 +798,7 @@ a.article-title:hover {
 }
 .article-nav-title {
   font-size: 0.85em;
-  line-height: 1.6em;
+  line-height: 1.5;
   margin-top: 0.5em;
 }
 .article-share-box {
@@ -967,7 +976,7 @@ a.article-title:hover {
   -moz-transition: color 0.2s;
   -ms-transition: color 0.2s;
   transition: color 0.2s;
-  line-height: 1.6em;
+  line-height: 1.5;
 }
 .archive-article-title:hover {
   color: #258fb8;
@@ -1051,7 +1060,7 @@ a.article-title:hover {
   text-decoration: underline;
 }
 #footer-info {
-  line-height: 1.6em;
+  line-height: 1.5;
   font-size: 0.85em;
 }
 .article-entry pre,
@@ -1064,7 +1073,7 @@ a.article-title:hover {
   border-width: 1px 0;
   overflow: auto;
   color: #ccc;
-  line-height: 22.400000000000002px;
+  line-height: 24px;
 }
 .article-entry .highlight .gutter pre,
 .article-entry .gist .gist-file .gist-data .line-numbers {
@@ -1129,7 +1138,7 @@ a.article-title:hover {
   padding-right: 20px;
 }
 .article-entry .highlight .line {
-  height: 22.400000000000002px;
+  height: 24px;
 }
 .article-entry .highlight .line.marked {
   background: #515151;
@@ -1300,7 +1309,7 @@ pre .javascript .function {
   list-style: disc;
 }
 .widget {
-  line-height: 1.6em;
+  line-height: 1.5;
   word-wrap: break-word;
   font-size: 0.9em;
 }
