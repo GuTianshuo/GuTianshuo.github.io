@@ -216,7 +216,7 @@
     var result  = poll.querySelector('.poll-result');
 
     // 选项 emoji 对应的中文含义（显示在结果里）
-    var TITLES = { helpful: '有帮助', unhelpful: '没帮助', hate: '讨厌我', learned: '学到了', poop: '丢大便' };
+    var TITLES = { helpful: '有帮助', unhelpful: '没帮助', hate: '不喜欢', learned: '学到了', poop: '丢大便' };
 
     // 投票完成：锁定所有选项、收起列表、隐藏触发器、显示结果
     function lockAndShow(opt) {
