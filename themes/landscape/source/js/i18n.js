@@ -50,7 +50,14 @@
     '.translated-article p{margin:8px 0}' +
     '.translated-article blockquote{border-left:3px solid #ddd;padding-left:12px;color:#666}' +
     '.translated-article pre{background:#f5f5f5;padding:10px;overflow-x:auto;border-radius:3px}' +
-    '.article-toolbar{margin:10px 0 14px;text-align:right}';
+    '.article-toolbar{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin:10px 0 14px}' +
+    '.article-poll{display:flex;align-items:center;flex-wrap:wrap;gap:6px}' +
+    '.poll-title{font-size:13px;color:#666;margin-right:2px}' +
+    '.poll-opt{background:#fff;border:1px solid #ddd;border-radius:20px;padding:3px 10px;font-size:13px;cursor:pointer;transition:all .15s}' +
+    '.poll-opt:hover{border-color:#258fb8;color:#258fb8}' +
+    '.poll-opt:disabled{opacity:.5;cursor:default}' +
+    '.poll-opt.poll-chosen{border-color:#258fb8;background:#e8f5fb}' +
+    '.poll-result{font-size:13px;color:#258fb8}';
   document.head.appendChild(style);
 
   /* ---------- 3. 语言切换 ---------- */
@@ -193,12 +200,48 @@
     }
   }
 
-  /* ---------- 5. 绑定事件 ---------- */
+  /* ---------- 5. 投票条（纯前端，localStorage 记录） ---------- */
+  function initPoll() {
+    var poll = document.getElementById('article-poll');
+    if (!poll) return;                       // 没有投票条（如首页）就不初始化
+
+    // 每个页面单独记忆：blog-poll:/文章路径/
+    var key = 'blog-poll:' + location.pathname;
+    var opts = poll.querySelectorAll('.poll-opt');
+    var result = poll.querySelector('.poll-result');
+
+    // 锁定所有按钮（投过之后不能再投），高亮已选项
+    function lock(chosen) {
+      opts.forEach(function (b) { b.disabled = true; });
+      if (chosen) chosen.classList.add('poll-chosen');
+    }
+
+    // 如果这个访客之前投过，恢复状态
+    var voted = localStorage.getItem(key);
+    if (voted) {
+      var prev = poll.querySelector('[data-opt="' + voted + '"]');
+      lock(prev);
+      if (prev && result) result.textContent = '已投：' + prev.textContent.trim();
+    }
+
+    // 绑定每个选项的点击事件
+    opts.forEach(function (b) {
+      b.addEventListener('click', function () {
+        var opt = b.getAttribute('data-opt');
+        try { localStorage.setItem(key, opt); } catch (e) {}
+        lock(b);
+        if (result) result.textContent = '✅ ' + b.textContent.trim();
+      });
+    });
+  }
+
+  /* ---------- 6. 绑定事件 ---------- */
   document.addEventListener('DOMContentLoaded', function () {
     applyLang(currentLang);
     var toggle = document.getElementById('lang-toggle');
     if (toggle) toggle.addEventListener('click', toggleLang);
     var tbtn = document.getElementById('translate-btn');
     if (tbtn) tbtn.addEventListener('click', translateArticle);
+    initPoll();
   });
 })();
