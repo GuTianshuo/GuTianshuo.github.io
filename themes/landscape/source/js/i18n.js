@@ -52,9 +52,12 @@
     '.translated-article pre{background:#f5f5f5;padding:10px;overflow-x:auto;border-radius:3px}' +
     '.article-toolbar{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin:10px 0 14px}' +
     '.article-poll{display:flex;align-items:center;flex-wrap:wrap;gap:6px}' +
-    '.poll-title{font-size:13px;color:#666;margin-right:2px}' +
-    '.poll-opt{background:#fff;border:1px solid #ddd;border-radius:20px;padding:3px 10px;font-size:13px;cursor:pointer;transition:all .15s}' +
-    '.poll-opt:hover{border-color:#258fb8;color:#258fb8}' +
+    '.poll-toggle{background:#fff;border:1px dashed #bbb;border-radius:20px;padding:3px 12px;font-size:13px;cursor:pointer;color:#555}' +
+    '.poll-toggle:hover{border-color:#258fb8;color:#258fb8}' +
+    '.poll-options{display:flex;align-items:center;gap:4px}' +
+    '.poll-options[hidden]{display:none}' +
+    '.poll-opt{background:#fff;border:1px solid #ddd;border-radius:50%;width:34px;height:34px;font-size:16px;cursor:pointer;transition:all .15s}' +
+    '.poll-opt:hover{border-color:#258fb8;transform:scale(1.12)}' +
     '.poll-opt:disabled{opacity:.5;cursor:default}' +
     '.poll-opt.poll-chosen{border-color:#258fb8;background:#e8f5fb}' +
     '.poll-result{font-size:13px;color:#258fb8}';
@@ -200,37 +203,48 @@
     }
   }
 
-  /* ---------- 5. 投票条（纯前端，localStorage 记录） ---------- */
+  /* ---------- 5. 投票条（默认折叠，点击展开 emoji 选项） ---------- */
   function initPoll() {
     var poll = document.getElementById('article-poll');
     if (!poll) return;                       // 没有投票条（如首页）就不初始化
 
     // 每个页面单独记忆：blog-poll:/文章路径/
     var key = 'blog-poll:' + location.pathname;
-    var opts = poll.querySelectorAll('.poll-opt');
-    var result = poll.querySelector('.poll-result');
+    var toggle  = document.getElementById('poll-toggle');
+    var options = document.getElementById('poll-options');
+    var opts    = poll.querySelectorAll('.poll-opt');
+    var result  = poll.querySelector('.poll-result');
 
-    // 锁定所有按钮（投过之后不能再投），高亮已选项
-    function lock(chosen) {
+    // 选项 emoji 对应的中文含义（显示在结果里）
+    var TITLES = { helpful: '有帮助', unhelpful: '没帮助', hate: '讨厌我', learned: '学到了', poop: '丢大便' };
+
+    // 投票完成：锁定所有选项、收起列表、隐藏触发器、显示结果
+    function lockAndShow(opt) {
       opts.forEach(function (b) { b.disabled = true; });
-      if (chosen) chosen.classList.add('poll-chosen');
+      if (opt) opt.classList.add('poll-chosen');
+      if (options) options.hidden = true;
+      if (toggle) toggle.style.display = 'none';
+      if (result) result.textContent = '已投：' + (TITLES[opt.getAttribute('data-opt')] || '');
     }
 
-    // 如果这个访客之前投过，恢复状态
+    // 如果这个访客之前投过，恢复已选状态（不显示触发器）
     var voted = localStorage.getItem(key);
     if (voted) {
       var prev = poll.querySelector('[data-opt="' + voted + '"]');
-      lock(prev);
-      if (prev && result) result.textContent = '已投：' + prev.textContent.trim();
+      if (prev) lockAndShow(prev);
     }
 
-    // 绑定每个选项的点击事件
+    // 触发器：点击展开 / 收起 emoji 选项
+    if (toggle) toggle.addEventListener('click', function () {
+      if (options) options.hidden = !options.hidden;
+    });
+
+    // 每个 emoji 选项：点击即投票
     opts.forEach(function (b) {
       b.addEventListener('click', function () {
         var opt = b.getAttribute('data-opt');
         try { localStorage.setItem(key, opt); } catch (e) {}
-        lock(b);
-        if (result) result.textContent = '✅ ' + b.textContent.trim();
+        lockAndShow(b);
       });
     });
   }
