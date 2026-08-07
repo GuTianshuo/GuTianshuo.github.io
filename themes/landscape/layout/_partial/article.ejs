@@ -10,6 +10,11 @@
         <%- partial('post/title', {class_name: 'p-name article-title'}) %>
       </header>
     <% } %>
+    <% if (!index){ %>
+      <div class="article-toolbar">
+        <button type="button" id="translate-btn" class="article-translate-btn" data-i18n="translate-btn">🌐 翻译文章</button>
+      </div>
+    <% } %>
     <div class="e-content article-entry" itemprop="articleBody">
       <% if (post.excerpt && index){ %>
         <%- post.excerpt %>
@@ -23,9 +28,6 @@
       <% } %>
     </div>
     <footer class="article-footer">
-      <% if (!index){ %>
-        <button type="button" id="translate-btn" class="article-translate-btn" data-i18n="translate-btn">🌐 翻译文章</button>
-      <% } %>
       <a data-url="<%- post.permalink %>" data-id="<%= post._id %>" data-title="<%= post.title %>" class="article-share-link"><span class="fa fa-share" data-i18n="share"><%= __('share') %></span></a>
       <% if (post.comments && theme.disqus_shortname){ %>
         <a href="<%- post.permalink %>#disqus_thread" class="article-comment-link"><span class="fa fa-comment"><%= __('comment') %></span></a>
