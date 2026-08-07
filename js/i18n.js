@@ -46,8 +46,11 @@
     '.article-translate-btn:hover{background:#f0f0f0;color:#333}' +
     '.article-translate-btn:disabled{opacity:.6;cursor:wait}' +
     '.translated-article{padding:15px 18px;margin:15px 0;border:1px dashed #bbb;' +
-    'border-radius:4px;background:#fafafa;display:none}' +
-    '.translated-article .translated-block{margin:8px 0;line-height:1.7}';
+    'border-radius:4px;background:#fafafa;display:none;line-height:1.8}' +
+    '.translated-article p{margin:8px 0}' +
+    '.translated-article blockquote{border-left:3px solid #ddd;padding-left:12px;color:#666}' +
+    '.translated-article pre{background:#f5f5f5;padding:10px;overflow-x:auto;border-radius:3px}' +
+    '.article-toolbar{margin:10px 0 14px;text-align:right}';
   document.head.appendChild(style);
 
   /* ---------- 3. 语言切换 ---------- */
@@ -132,50 +135,35 @@
     }
     if (state === 'translating') return; // 翻译中，忽略重复点击
 
-    /* --- 开始翻译 --- */
+    /* --- 开始翻译：克隆原文，排版结构完整保留 --- */
     btn.setAttribute('data-state', 'translating');
     btn.textContent = '翻译中…';
     btn.disabled = true;
 
-    // 收集正文块元素（跳过代码块）
-    var blocks = [];
-    entry.querySelectorAll('h1,h2,h3,h4,h5,h6,p,li,blockquote,td,th,figcaption,dt,dd').forEach(function (el) {
+    var clone = entry.cloneNode(true);
+
+    // 收集「叶子文本元素」（无块级子元素）逐个翻译；代码块原样保留
+    var targets = [];
+    clone.querySelectorAll('p,h1,h2,h3,h4,h5,h6,li,td,th,blockquote,dt,dd,figcaption').forEach(function (el) {
       if (el.closest('pre,code,.highlight,script,style')) return;
+      if (el.querySelector('p,h1,h2,h3,h4,h5,h6,li,td,th,blockquote')) return; // 有块级子元素 → 交给子级
       var t = el.textContent.replace(/\s+/g, ' ').trim();
       if (!t) return;
-      blocks.push({ el: el, text: t });
+      targets.push({ el: el, text: t });
     });
 
-    // 创建译文容器（保留标题层级）
-    var translated = document.getElementById('translated-article');
-    if (!translated) {
-      translated = document.createElement('div');
-      translated.id = 'translated-article';
-      entry.parentNode.insertBefore(translated, entry.nextSibling);
-    }
-    translated.innerHTML = '';
-    blocks.forEach(function (b) {
-      var tag = b.el.tagName.toLowerCase();
-      var isHeading = /^h[1-6]$/.test(tag);
-      var n = document.createElement(isHeading ? tag : 'p');
-      n.className = 'translated-block';
-      n.textContent = '…';
-      translated.appendChild(n);
-    });
-
-    // 串行翻译每个块（每块内部再分段）
-    var nodes = translated.querySelectorAll('.translated-block');
+    // 串行翻译并替换文本（保留标签与 CSS 样式）
     var idx = 0;
-    function nextBlock() {
-      if (idx >= blocks.length) { finish(); return; }
-      var b = blocks[idx];
-      var segs = splitText(b.text, 450);
+    function next() {
+      if (idx >= targets.length) { finish(); return; }
+      var tgt = targets[idx];
+      var segs = splitText(tgt.text, 450);
       var out = '', i = 0;
       (function segNext() {
         if (i >= segs.length) {
-          nodes[idx].textContent = out;
+          tgt.el.textContent = out;
           idx++;
-          nextBlock();
+          next();
           return;
         }
         gtrans(segs[i], function (tr) {
@@ -185,9 +173,18 @@
         });
       })();
     }
-    nextBlock();
+    next();
 
     function finish() {
+      // 把排版保留的译文（clone）作为译文容器显示
+      var translated = document.getElementById('translated-article');
+      if (!translated) {
+        translated = document.createElement('div');
+        translated.id = 'translated-article';
+        entry.parentNode.insertBefore(translated, entry.nextSibling);
+      }
+      translated.innerHTML = '';
+      translated.appendChild(clone);
       entry.style.display = 'none';
       translated.style.display = 'block';
       btn.setAttribute('data-state', 'translated');
