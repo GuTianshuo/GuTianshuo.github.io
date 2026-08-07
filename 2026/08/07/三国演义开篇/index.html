@@ -14,7 +14,7 @@
 <meta property="og:description" content="这是一篇测试文章，用来验证博客的标题、正文、引用、代码块、列表等 Markdown 渲染功能。  临江仙 · 滚滚长江东逝水 滚滚长江东逝水，浪花淘尽英雄。是非成败转头空。青山依旧在，几度夕阳红。 白发渔樵江渚上，惯看秋月春风。一壶浊酒喜相逢。古今多少事，都付笑谈中。  开篇话说天下大势，分久必合，合久必分。周末七国分争，并入于秦。及秦灭之后，楚、汉分争，又并入于汉。汉朝自高祖斩白蛇而起义，一统">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-08-07T04:00:00.000Z">
-<meta property="article:modified_time" content="2026-08-07T06:17:55.313Z">
+<meta property="article:modified_time" content="2026-08-07T06:26:42.872Z">
 <meta property="article:author" content="古">
 <meta property="article:tag" content="测试">
 <meta property="article:tag" content="随笔">
@@ -59,9 +59,9 @@
       <nav id="main-nav">
         <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
         
-          <a class="main-nav-link" href="/">Home</a>
+          <a class="main-nav-link" href="/" data-i18n="menu-home">Home</a>
         
-          <a class="main-nav-link" href="/archives">Archives</a>
+          <a class="main-nav-link" href="/archives" data-i18n="menu-archives">Archives</a>
         
       </nav>
       <nav id="sub-nav">
@@ -70,6 +70,7 @@
           <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
         
         <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+        <a class="nav-icon nav-lang-btn" id="lang-toggle" title="Language"><span class="fa fa-globe"></span></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://gutianshuo.github.io"></form>
@@ -153,7 +154,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://gutianshuo.github.io/2026/08/07/%E4%B8%89%E5%9B%BD%E6%BC%94%E4%B9%89%E5%BC%80%E7%AF%87/" data-id="cuidG5LQ0GAaJ7wXeLxmTGnb0" data-title="测试文章：三国演义开篇" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+        <button type="button" id="translate-btn" class="article-translate-btn" data-i18n="translate-btn">🌐 翻译文章</button>
+      
+      <a data-url="https://gutianshuo.github.io/2026/08/07/%E4%B8%89%E5%9B%BD%E6%BC%94%E4%B9%89%E5%BC%80%E7%AF%87/" data-id="cuidYmmfLklgKdjwTvDRti0rC" data-title="测试文章：三国演义开篇" class="article-share-link"><span class="fa fa-share" data-i18n="share">分享</span></a>
       
       
       
@@ -173,7 +177,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">分类</h3>
+    <h3 class="widget-title" data-i18n="categories">分类</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a></li></ul>
     </div>
@@ -183,7 +187,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">标签</h3>
+    <h3 class="widget-title" data-i18n="tags">标签</h3>
     <div class="widget">
       <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%8B%E8%AF%95/" rel="tag">测试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag">随笔</a></li></ul>
     </div>
@@ -193,7 +197,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">标签云</h3>
+    <h3 class="widget-title" data-i18n="tagcloud">标签云</h3>
     <div class="widget tagcloud">
       <a href="/tags/%E6%B5%8B%E8%AF%95/" style="font-size: 10px;">测试</a> <a href="/tags/%E9%9A%8F%E7%AC%94/" style="font-size: 10px;">随笔</a>
     </div>
@@ -202,7 +206,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">归档</h3>
+    <h3 class="widget-title" data-i18n="archive_a">归档</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/08/">八月 2026</a></li></ul>
     </div>
@@ -212,7 +216,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">最新文章</h3>
+    <h3 class="widget-title" data-i18n="recent_posts">最新文章</h3>
     <div class="widget">
       <ul>
         
@@ -242,9 +246,9 @@
     </div>
     <nav id="mobile-nav">
   
-    <a href="/" class="mobile-nav-link">Home</a>
+    <a href="/" class="mobile-nav-link" data-i18n="menu-home">Home</a>
   
-    <a href="/archives" class="mobile-nav-link">Archives</a>
+    <a href="/archives" class="mobile-nav-link" data-i18n="menu-archives">Archives</a>
   
 </nav>
     
@@ -261,6 +265,9 @@
 
 
 <script src="/js/script.js"></script>
+
+
+<script src="/js/i18n.js"></script>
 
 
 
