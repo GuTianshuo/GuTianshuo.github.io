@@ -52,8 +52,10 @@
     '.translated-article pre{background:#f5f5f5;padding:10px;overflow-x:auto;border-radius:3px}' +
     '.article-toolbar{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin:10px 0 14px}' +
     '.article-poll{display:flex;align-items:center;flex-wrap:wrap;gap:6px}' +
-    '.poll-toggle{background:#fff;border:1px dashed #bbb;border-radius:20px;padding:3px 12px;font-size:13px;cursor:pointer;color:#555}' +
-    '.poll-toggle:hover{border-color:#258fb8;color:#258fb8}' +
+    '.poll-toggle{background:none;border:none;border-bottom:1px dashed #bbb;color:#555;font-size:14px;font-family:inherit;cursor:pointer;padding:2px 0;margin-bottom:2px}' +
+    '.poll-toggle:hover{color:#258fb8;border-bottom-color:#258fb8}' +
+    '.poll-caret{display:inline-block;margin-left:3px;font-size:11px;color:#999;transition:transform .2s}' +
+    '.poll-toggle.open .poll-caret{transform:rotate(180deg);color:#258fb8}' +
     '.poll-options{display:flex;align-items:center;gap:4px}' +
     '.poll-options[hidden]{display:none}' +
     '.poll-opt{background:#fff;border:1px solid #ddd;border-radius:50%;width:34px;height:34px;font-size:16px;cursor:pointer;transition:all .15s}' +
@@ -234,9 +236,12 @@
       if (prev) lockAndShow(prev);
     }
 
-    // 触发器：点击展开 / 收起 emoji 选项
+    // 触发器：点击展开 / 收起 emoji 选项（箭头同步旋转）
     if (toggle) toggle.addEventListener('click', function () {
-      if (options) options.hidden = !options.hidden;
+      if (options) {
+        options.hidden = !options.hidden;
+        toggle.classList.toggle('open', !options.hidden);
+      }
     });
 
     // 每个 emoji 选项：点击即投票
