@@ -12,17 +12,6 @@
     <% } %>
     <% if (!index){ %>
       <div class="article-toolbar">
-        <div class="article-poll" id="article-poll">
-          <button type="button" class="poll-toggle" id="poll-toggle">你觉得这篇怎么样？<span class="poll-caret">▾</span></button>
-          <div class="poll-options" id="poll-options" hidden>
-            <button type="button" class="poll-opt" data-opt="helpful" title="有帮助">👍</button>
-            <button type="button" class="poll-opt" data-opt="unhelpful" title="没帮助">👎</button>
-            <button type="button" class="poll-opt" data-opt="hate" title="不喜欢">😠</button>
-            <button type="button" class="poll-opt" data-opt="learned" title="学到了">🎓</button>
-            <button type="button" class="poll-opt" data-opt="poop" title="丢大便">💩</button>
-          </div>
-          <span class="poll-result"></span>
-        </div>
         <button type="button" id="translate-btn" class="article-translate-btn" data-i18n="translate-btn">🌐 翻译文章</button>
       </div>
     <% } %>
