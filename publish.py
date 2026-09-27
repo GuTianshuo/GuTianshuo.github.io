@@ -23,7 +23,7 @@ import platform
 # 博客根目录（脚本所在目录）
 BLOG_DIR = os.path.dirname(os.path.abspath(__file__))
 POSTS_DIR = os.path.join(BLOG_DIR, "source", "_posts")
-SITE_URL = "https://gutianshuo.github.io"
+SITE_URL = "https://blog.gggts.com"
 
 
 def run(cmd: str) -> int:

@@ -4,7 +4,7 @@
 
 # Site
 title: 古的博客
-subtitle: '一锅粥'
+subtitle: ''
 description: 'AI 学习、工程实践与生活随笔'
 keywords: 'AI, 机器学习, 深度学习, 工程实践, 随笔'
 author: 古
@@ -13,7 +13,7 @@ timezone: 'Asia/Shanghai'
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
-url: https://gutianshuo.github.io
+url: https://blog.gggts.com
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 pretty_urls:
