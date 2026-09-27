@@ -19,3 +19,45 @@
     margin-top: 1.5em;
   }
 }
+
+/* ------------------------------------------------------------
+   图片说明文字 与 Read More
+   这两处都被上面那条 text-indent: 2em 连带右推了 2em：
+   主题里 .caption 本身是 text-align:center，Read More 是 inline-block 胶囊，
+   首行缩进会让它们整体偏移，所以这里显式清零并重新居中。
+   ------------------------------------------------------------ */
+
+/* 海报下面的说明文字 */
+.article-entry .caption {
+  text-indent: 0;
+  text-align: center;
+}
+
+/* Read More：外层段落居中，胶囊自身文字也居中 */
+.article-entry .article-more-link,
+.article-more-link {
+  text-indent: 0;
+  text-align: center;
+  margin: 1.8em 0 0.6em;
+}
+
+/* 胶囊本体：主题默认是 #eee 底 + #999 字（对比度太低，不显眼），
+   改成主题强调色实底 + 白色粗体。想换颜色只改 background 那一行即可。 */
+.article-more-link a {
+  display: inline-block;
+  text-indent: 0;
+  text-align: center;
+  font-weight: bold;
+  padding: 9px 28px;
+  border-radius: 999px;
+  background: #258fb8;   /* 主题的 color-link */
+  color: #fff;
+  text-shadow: none;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.article-more-link a:hover {
+  background: #1c6f90;
+  color: #fff;
+  transform: translateY(-1px);
+}
