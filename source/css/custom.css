@@ -1,0 +1,21 @@
+/* ============================================================
+   自定义样式（通过 scripts/inject-custom-css.js 注入到 <head>）
+   主题文件 themes/landscape 保持原样，便于日后更新主题
+   ============================================================ */
+
+/* 中文正文：自然段首行缩进两字。
+   主题里 img 是 display:block，所以 text-indent 不会把海报推歪。 */
+.article-entry p {
+  text-indent: 2em;
+}
+
+/* 手机端（<=767px，覆盖 phone 与 tablet 两档断点）：
+   大标题与正文首块（海报）之间留出一行空隙 */
+@media (max-width: 767px) {
+  .article-header {
+    padding-bottom: 1.5em;
+  }
+  .article-entry > :first-child {
+    margin-top: 1.5em;
+  }
+}
